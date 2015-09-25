@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Search spacelog</title>
+  </head>
+  <body>
+    <form method="GET" action="/">
+      <input type="search" name="q" value="{{ query_string }}">
+      <input type="submit">
+    </form>
+    <ol>
+    {% for hit in hits %}
+      <li>
+        <a href="{{ hit["_source"]["url"] }}">{{ hit["_source"]["timestamp_seconds"] }}</a>
+        <b>{{ hit["_source"]["speaker"][0] }}</b>
+        {{ hit["_source"]["text"][0] }}
+        {{ hit["_score"] }}
+      </li>
+    {% endfor %}
+    <ol>
+  </body>
+</html>
